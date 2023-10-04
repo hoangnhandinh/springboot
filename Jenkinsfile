@@ -7,15 +7,15 @@ pipeline {
     }
     stages {
 
-        stage('Packaging/Pushing imagae') {
+        // stage('Packaging/Pushing imagae') {
 
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t nhandinh4747/springboot .'
-                    sh 'docker push nhandinh4747/springboot'
-                }
-            }
-        }
+        //     steps {
+        //         withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+        //             sh 'docker build -t nhandinh4747/springboot .'
+        //             sh 'docker push nhandinh4747/springboot'
+        //         }
+        //     }
+        // }
 
         stage('Deploy MySQL to DEV') {
             steps {
@@ -32,17 +32,17 @@ pipeline {
             }
         }
 
-        stage('Deploy Spring Boot to DEV') {
-            steps {
-                echo 'Deploying and cleaning'
-                sh 'docker image pull nhandinh4747/springboot'
-                sh 'docker container stop nhandinh4747-springboot || echo "this container does not exist" '
-                sh 'docker network create dev || echo "this network exists"'
-                sh 'echo y | docker container prune '
+        // stage('Deploy Spring Boot to DEV') {
+        //     steps {
+        //         echo 'Deploying and cleaning'
+        //         sh 'docker image pull nhandinh4747/springboot'
+        //         sh 'docker container stop nhandinh4747-springboot || echo "this container does not exist" '
+        //         sh 'docker network create dev || echo "this network exists"'
+        //         sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name nhandinh4747-springboot -p 8081:8080 --network dev nhandinh4747/springboot'
-            }
-        }
+        //         sh 'docker container run -d --rm --name nhandinh4747-springboot -p 8081:8080 --network dev nhandinh4747/springboot'
+        //     }
+        // }
  
     }
     post {
