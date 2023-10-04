@@ -22,25 +22,25 @@ pipeline {
                 echo 'Deploying and cleaning'
                 sh 'docker image pull mysql:8.0'
                 sh 'docker network create dev || echo "this network exists"'
-                sh 'docker container stop nhandinh4747-mysql || echo "this container does not exist" '
+                sh 'docker container stop nhandinh-mysql || echo "this container does not exist" '
                 sh 'echo y | docker container prune '
-                sh 'docker volume rm nhandinh4747-mysql-data || echo "no volume"'
+                sh 'docker volume rm nhandinh-mysql-data || echo "no volume"'
 
-                sh "docker run --name khalid-mysql --rm --network dev -v khalid-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=db_example  -d mysql:8.0 "
+                sh "docker run --name nhandinh-mysql --rm --network dev -v nhandinh-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Elcom@123 -e MYSQL_DATABASE=db_example  -d mysql:8.0 "
                 sh 'sleep 20'
-                sh "docker exec -i khalid-mysql mysql --user=root --password=${MYSQL_ROOT_LOGIN_PSW} < script"
+                sh "docker exec -i nhandinh-mysql mysql --user=root --password=Elcom@123 < script"
             }
         }
 
         // stage('Deploy Spring Boot to DEV') {
         //     steps {
         //         echo 'Deploying and cleaning'
-        //         sh 'docker image pull nhandinh4747/springboot'
-        //         sh 'docker container stop nhandinh4747-springboot || echo "this container does not exist" '
+        //         sh 'docker image pull nhandinh/springboot'
+        //         sh 'docker container stop nhandinh-springboot || echo "this container does not exist" '
         //         sh 'docker network create dev || echo "this network exists"'
         //         sh 'echo y | docker container prune '
 
-        //         sh 'docker container run -d --rm --name nhandinh4747-springboot -p 8081:8080 --network dev nhandinh4747/springboot'
+        //         sh 'docker container run -d --rm --name nhandinh4-springboot -p 8081:8080 --network dev nhandinh/springboot'
         //     }
         // }
  
