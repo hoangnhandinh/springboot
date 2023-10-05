@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy Spring Boot to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker image pull nhandinh/springboot'
+                sh 'docker pull nhandinh4747/springboot:latest'
                 sh 'docker container stop nhandinh-springboot || echo "this container does not exist" '
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
