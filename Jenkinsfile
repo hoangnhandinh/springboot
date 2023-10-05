@@ -7,15 +7,15 @@ pipeline {
     }
     stages {
 
-        stage('Packaging/Pushing imagae') {
+        // stage('Packaging/Pushing imagae') {
 
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t nhandinh4747/springboot .'
-                    sh 'docker push nhandinh4747/springboot'
-                }
-            }
-        }
+        //     steps {
+        //         withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+        //             sh 'docker build -t nhandinh4747/springboot .'
+        //             sh 'docker push nhandinh4747/springboot'
+        //         }
+        //     }
+        // }
 
         // stage('Deploy MySQL to DEV') {
         //     steps {
