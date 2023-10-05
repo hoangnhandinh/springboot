@@ -32,17 +32,17 @@ pipeline {
             }
         }
 
-        // stage('Deploy Spring Boot to DEV') {
-        //     steps {
-        //         echo 'Deploying and cleaning'
-        //         sh 'docker image pull nhandinh/springboot'
-        //         sh 'docker container stop nhandinh-springboot || echo "this container does not exist" '
-        //         sh 'docker network create dev || echo "this network exists"'
-        //         sh 'echo y | docker container prune '
+        stage('Deploy Spring Boot to DEV') {
+            steps {
+                echo 'Deploying and cleaning'
+                sh 'docker image pull nhandinh/springboot'
+                sh 'docker container stop nhandinh-springboot || echo "this container does not exist" '
+                sh 'docker network create dev || echo "this network exists"'
+                sh 'echo y | docker container prune '
 
-        //         sh 'docker container run -d --rm --name nhandinh4-springboot -p 8081:8080 --network dev nhandinh/springboot'
-        //     }
-        // }
+                sh 'docker container run -d --rm --name nhandinh4-springboot -p 8081:8080 --network dev nhandinh/springboot'
+            }
+        }
  
     }
     post {
