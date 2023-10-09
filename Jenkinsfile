@@ -31,10 +31,10 @@ pipeline {
         stage('Deploy Spring Boot to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker image pull httpd:latest'
-                sh 'docker container stop nhandinh-httpd || echo "this container does not exist" '
+                sh 'docker image pull nginx:latest'
+                sh 'docker container stop nhandinh-nginx || echo "this container does not exist" '
                 sh 'echo y | docker container prune '
-                sh "docker run --name nhandinh-httpd -p 8080:80 -d  httpd:latest"
+                sh "docker run -it --rm -d -p 8083:80 --name nhandinh-nginx -v /opt/springboot/dinhhn/:/usr/share/nginx/html/ nginx"
             }
         }
 
